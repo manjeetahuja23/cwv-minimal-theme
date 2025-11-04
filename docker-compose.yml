@@ -1,41 +1,41 @@
-version: "3.9"
-
 services:
   db:
-    image: mysql:8
-    command: --default-authentication-plugin=mysql_native_password
+    image: mariadb:10.11
+    # If your Codespace is ARM-only and pulls the wrong arch, uncomment:
+    platform: linux/amd64
+    container_name: cwv-minimal-theme-db-1
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
-      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: root
+      TZ: UTC
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 25s
 
   wordpress:
-    image: wordpress:php8.2-apache
+    image: wordpress:6.6-php8.2-apache
     depends_on:
       db:
         condition: service_healthy
+    ports:
+      - "8080:80"
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
-    ports:
-      - "8080:80"
+      TZ: UTC
     volumes:
       - ./theme:/var/www/html/wp-content/themes/cwv-minimal
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/wp-login.php"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+    restart: unless-stopped
 
 volumes:
   db_data:
