@@ -17,13 +17,16 @@ add_action( 'after_setup_theme', function () {
     );
 } );
 
-add_action( 'wp_enqueue_scripts', function () {
-    $theme_uri = get_template_directory_uri();
+add_action('wp_enqueue_scripts', function () {
+  // Main theme stylesheet (style.css)
+  wp_enqueue_style('cwv-style', get_stylesheet_uri(), [], '1.0');
 
-    wp_enqueue_style( 'cwv-minimal-style', $theme_uri . '/assets/css/main.css', [], CWV_MINIMAL_VERSION );
+  // Minimal additional CSS
+  wp_enqueue_style('cwv-main', get_stylesheet_directory_uri() . '/assets/css/main.css', [], '1.0');
 
-    wp_enqueue_script( 'cwv-minimal-script', $theme_uri . '/assets/js/main.js', [], CWV_MINIMAL_VERSION, true );
-} );
+  // Minimal JS
+  wp_enqueue_script('cwv-js', get_stylesheet_directory_uri() . '/assets/js/main.js', [], '1.0', true);
+});
 
 add_filter( 'wp_get_attachment_image_attributes', function ( $attr ) {
     if ( empty( $attr['loading'] ) ) {
