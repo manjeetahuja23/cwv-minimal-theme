@@ -1,18 +1,38 @@
-# Manjeet Ahuja — 72-Hour Developer Portfolio
-A live technical portfolio built in 72 hours demonstrating:
-- WordPress Theme Dev
-- Shopify App Integration
-- SEO Audit & Optimization
+# CWV Minimal Theme
 
-## 🔗 Live Demos
-| Project | Repo | Live Link |
-|----------|-------|-----------|
-| CWV Minimal Theme | [cwv-minimal-theme](https://github.com/manjeetahuja/cwv-minimal-theme) | https://manjeetahuja.github.io/cwv-minimal-theme |
-| Shopify Demo | [shopify-section-metaobjects-demo](https://github.com/manjeetahuja/shopify-section-metaobjects-demo) | https://manjeetahuja.github.io/shopify-section-metaobjects-demo |
-| SEO Case Study | [seo-technical-audit-case-study](https://github.com/manjeetahuja/seo-technical-audit-case-study) | https://manjeetahuja.github.io/seo-technical-audit-case-study |
+A lightweight WordPress theme scaffold focused on Core Web Vitals and accessibility.
 
-## ⚙️ Tools
-WordPress • Shopify • Node.js • SEO Audit Tools • GitHub Pages
+## Features
+- Semantic HTML templates with lazy-loading media and skip links.
+- Minimal CSS and JS optimized for fast Largest Contentful Paint (LCP).
+- SEO-ready metadata, JSON-LD schema, and clean navigation structure.
+- Docker Compose and wp-env support for rapid local development.
 
-## 📄 License
+## Core Web Vitals Targets
+- **LCP:** < 2.5 seconds
+- **CLS:** < 0.1
+- **TBT:** < 200 ms
+
+## Quick Start
+```bash
+wp-env start
+```
+
+or using Docker Compose:
+```bash
+docker compose up -d
+```
+
+## Run Lighthouse
+```bash
+lighthouse https://example.test --preset=desktop --view
+```
+
+## Screenshots Checklist
+- ✅ Front page hero
+- ✅ Navigation and footer
+- ✅ Product landing page sections
+- ✅ Mobile viewport hero and CTA
+
+## License
 MIT © 2025 Manjeet Ahuja
